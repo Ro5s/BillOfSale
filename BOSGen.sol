@@ -30,7 +30,7 @@ contract BOSGen {
     // deploy a new BOS contract
     // ------------------------------------------------------------------------
     
-    function newBillOfSale(string contractHash)
+    function newBillOfSale()
         public
         returns(address newContract)
     {
