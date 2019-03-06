@@ -1,5 +1,5 @@
 # BillOfSale
-Demo on OpenLaw.io: ((Smarter) Bill of Sale)[https://app.openlaw.io/template/(Smarter)%20Bill%20of%20Sale]
+Demo on OpenLaw.io: [Smarter Bill of Sale](https://app.openlaw.io/template/(Smarter)%20Bill%20of%20Sale)
 
 See also: https://blog.goodaudience.com/e-commerce-with-legal-and-blockchain-security-6f2ba6c244a3
 
