@@ -1,10 +1,6 @@
 pragma solidity >0.4.23 <0.6.0;
 
-// ------------------------------------------------------------------------
-// deploy a BOS Generator Contract
-// ------------------------------------------------------------------------
-
-contract BOSGen {
+contract BillOfSaleGenerator {
     address[] public contracts;
     address public lastContractAddress;
     
@@ -26,25 +22,17 @@ contract BOSGen {
         return contracts.length;
     }
 
-    // ------------------------------------------------------------------------
-    // deploy a new BOS contract
-    // ------------------------------------------------------------------------
-    
-    function newBillOfSale()
+    function newBillOfSale(string descr, uint price, address seller, address buyer)
         public
         returns(address newContract)
     {
-        BillOfSale c = (new BillOfSale)();
+        BillOfSale c = new BillOfSale(descr, price, seller, buyer);
         contracts.push(c);
         lastContractAddress = address(c);
         emit newBillOfSaleContract(c);
         return c;
     }
 
-    // ------------------------------------------------------------------------
-    //tell me a position and I will tell you its address  
-    // ------------------------------------------------------------------------
-    
     function seeBillOfSale(uint pos)
         public
         constant
@@ -60,7 +48,7 @@ contract BillOfSale {
 	string public descr;
 	uint public price;
     
-	function recordContract(string _descr, uint _price,
+	constructor(string _descr, uint _price,
     	address _seller, address _buyer) public {
     	descr = _descr;
     	price = _price;
