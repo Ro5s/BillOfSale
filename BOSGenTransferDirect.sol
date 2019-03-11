@@ -16,7 +16,7 @@ contract BillOfSaleGenerator {
 
     function getContractCount()
         public
-        constant
+        view
         returns(uint contractCount)
     {
         return contracts.length;
@@ -35,7 +35,7 @@ contract BillOfSaleGenerator {
 
     function seeBillOfSale(uint pos)
         public
-        constant
+        view
         returns(address contractAddress)
     {
         return address(contracts[pos]);
@@ -43,28 +43,26 @@ contract BillOfSaleGenerator {
 }
 
 contract BillOfSale {
-    address payable public seller;
-    address public buyer;
-    string public descr;
-    uint public price;
-    bool public confirmed;
-  
-    //from OpenLaw Template
-    function recordContract(string memory _descr, uint _price,
-    address payable _seller, address _buyer
-    ) public {
-      descr = _descr;
-      price = _price;
-      seller = _seller; 
-      buyer = _buyer;
-    }
-  
-    function () external payable { }
+	address public seller;
+	address public buyer;
+	string public descr;
+	uint public price;
+	bool public confirmed;
     
-    function confirmReceipt() public payable {
-      require(msg.sender == buyer, "only buyer can confirm");
-      require(address(this).balance == price, "purchase price must be funded");
-      address(seller).transfer(address(this).balance);
-      confirmed = true;
-    }
+	constructor(string memory _descr, uint _price,
+    	address _seller, address _buyer) public {
+    	descr = _descr;
+    	price = _price;
+    	seller = _seller;
+    	buyer = _buyer;
+	}
+    
+	function () external payable { }
+    
+	function confirmReceipt() public payable  {
+    	require(msg.sender == buyer, "only buyer can confirm");
+    	require(address(this).balance == price, "purchase price must be funded");
+    	address(seller).transfer(address(this).balance);
+    	confirmed = true;
+	}
 }
